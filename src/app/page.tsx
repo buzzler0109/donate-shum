@@ -4,23 +4,26 @@ import { useState } from "react";
 import Image from "next/image";
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setSubmitted(true);
-    setIsSubmitting(false);
-    setEmail("");
-  };
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#080807] relative overflow-hidden flex flex-col">
-      {/* Scanlines background */}
-      <div className="absolute right-0 top-0 w-2/3 h-full pointer-events-none">
+      {/* Header with logo */}
+      <header className="relative z-20 w-full px-4 py-3">
+        <div className="border border-[#3A3A3A] rounded-full px-6 py-2 flex justify-center bg-[#0A0A09]/80 shadow-[0_0_15px_rgba(80,80,80,0.3)]">
+          <Image
+            src="/images/logo.png"
+            alt="SHUM"
+            width={70}
+            height={20}
+            className="opacity-90"
+            priority
+          />
+        </div>
+      </header>
+
+      {/* Scanlines background - below header */}
+      <div className="absolute right-0 top-16 w-2/3 h-[calc(100%-4rem)] pointer-events-none z-0">
         <Image
           src="/images/scanlines.png"
           alt=""
@@ -30,93 +33,62 @@ export default function Home() {
         />
       </div>
 
-      {/* Header with logo */}
-      <header className="relative z-10 w-full px-6 py-3 md:px-8 md:py-4 border-b border-[#2A2A29]">
-        <div className="max-w-4xl mx-auto flex justify-center">
-          <Image
-            src="/images/logo.png"
-            alt="SHUM"
-            width={80}
-            height={24}
-            className="opacity-90"
-            priority
-          />
-        </div>
-      </header>
-
       {/* Main content */}
-      <main className="relative z-10 flex-1 flex items-center justify-center px-6 md:px-8 py-8">
-        <div className="max-w-4xl mx-auto w-full">
-          {/* Title */}
-          <div className="text-center mb-6">
-            <h1 className="font-[family-name:var(--font-bebas)] text-4xl md:text-6xl lg:text-7xl tracking-tight">
-              <span className="text-[#CFCFCF]">SHUM OSINT</span>
+      <main className="relative z-10 flex-1 flex items-start px-8 md:px-16 py-12">
+        <div className="max-w-2xl w-full">
+          {/* Title - left aligned */}
+          <div className="mb-4">
+            <h1 className="font-[family-name:var(--font-bebas)] text-5xl md:text-7xl lg:text-8xl tracking-tight text-white font-bold leading-[0.9]">
+              SHUM OSINT
             </h1>
-            <h2 className="font-[family-name:var(--font-bebas)] text-3xl md:text-5xl lg:text-6xl tracking-tight text-[#5A5A5A]">
+            <h2 className="font-[family-name:var(--font-bebas)] text-4xl md:text-6xl lg:text-7xl tracking-tight text-[#5A5A5A] leading-[0.9]">
               DONATION HUB
             </h2>
           </div>
 
-          {/* Description */}
-          <p className="text-[#6B6B6B] text-xs md:text-sm max-w-md mx-auto text-center leading-relaxed mb-10">
-            Шум — це розвідувальна спільнота, що використовує аналітичні методи та розвідку з відкритих джерел для збору Інформації та виявлення цілей для Сил оборони України.
+          {/* Description - left aligned */}
+          <p className="text-[#6B6B6B] text-xs md:text-sm max-w-sm leading-relaxed mb-12">
+            Шум — це розвідувальна спільнота, що
+            <br />використовує аналітичні методи та
+            <br />розвідку з
+            <br />відкритих джерел для збору Інформації та
+            <br />виявлення цілей для Сил оборони України.
           </p>
 
-          {/* FPV Drone with CTA */}
-          <div className="flex justify-center mb-8">
+          {/* FPV Drone with hover glow effect */}
+          <div className="relative">
             <a
               href="https://send.monobank.ua/jar/example"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative hover:scale-105 transition-transform flex items-center"
+              className="relative inline-block"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
+              {/* Glow effect on hover */}
+              <div 
+                className={`absolute inset-0 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                style={{ transform: 'scale(1.1)', filter: 'blur(2px)' }}
+              >
+                <Image
+                  src="/images/drone_blur.png"
+                  alt=""
+                  width={400}
+                  height={100}
+                  className="w-full h-auto"
+                />
+              </div>
+              
+              {/* Main drone */}
               <Image
                 src="/images/drone.png"
-                alt="FPV Drone"
-                width={350}
-                height={80}
-                className="opacity-95"
+                alt="FPV Drone - Click to donate"
+                width={400}
+                height={100}
+                className="relative z-10"
                 priority
               />
-              <span className="absolute left-[55%] top-1/2 -translate-y-1/2 font-[family-name:var(--font-bebas)] text-base md:text-xl text-[#D4842A] tracking-wider whitespace-nowrap group-hover:text-[#E89A4A] transition-colors">
-                ДОНАТЬ НА ФАШИЗМ
-              </span>
             </a>
-          </div>
-
-          {/* Big Text */}
-          <div className="text-center mb-10">
-            <p className="font-[family-name:var(--font-bebas)] text-3xl md:text-5xl lg:text-6xl leading-[1] tracking-tight text-[#CFCFCF] italic">
-              ПРИЄДНУЙТЕСЬ ДО
-            </p>
-            <p className="font-[family-name:var(--font-bebas)] text-3xl md:text-5xl lg:text-6xl leading-[1] tracking-tight text-[#CFCFCF] italic">
-              НАШОЇ КОМАНДИ
-            </p>
-          </div>
-
-          {/* Email Form */}
-          <div className="flex justify-center">
-            {submitted ? (
-              <p className="text-[#D4842A] font-medium">✓ Дякуємо за підписку!</p>
-            ) : (
-              <form onSubmit={handleSubmit} className="flex gap-2 w-full max-w-md">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="email"
-                  required
-                  className="flex-1 bg-[#141413] border border-[#2A2A29] px-5 py-3 text-[#CFCFCF] placeholder-[#4A4A4A] focus:outline-none focus:border-[#D4842A] transition-colors font-[family-name:var(--font-bebas)] text-lg tracking-wider"
-                />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="bg-[#3A3A39] hover:bg-[#4A4A49] disabled:opacity-50 text-[#CFCFCF] px-6 py-3 font-[family-name:var(--font-bebas)] text-lg tracking-wider transition-all"
-                >
-                  {isSubmitting ? "..." : "reg."}
-                </button>
-              </form>
-            )}
           </div>
         </div>
       </main>
