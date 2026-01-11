@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -17,158 +18,216 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080807] relative overflow-hidden">
-      {/* Decorative lines on the right */}
-      <div className="absolute right-0 top-1/4 w-1/3 h-96 pointer-events-none opacity-30">
-        {[...Array(40)].map((_, i) => (
-          <div 
-            key={i} 
-            className="h-[2px] bg-[#C87C2D] mb-2"
-            style={{ 
-              width: `${Math.random() * 60 + 40}%`,
-              marginLeft: 'auto',
-              opacity: Math.random() * 0.5 + 0.3
+    <div className="min-h-screen bg-[#080807] relative overflow-hidden flex flex-col">
+      {/* Scanlines background - use image if available, fallback to CSS */}
+      <div className="absolute right-0 top-0 w-2/3 h-full pointer-events-none">
+        {/* Try to use uploaded image, fallback to CSS effect */}
+        <div className="relative w-full h-full">
+          <Image
+            src="/images/scanlines.png"
+            alt=""
+            fill
+            className="object-contain object-right opacity-80"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
             }}
           />
-        ))}
+          {/* CSS Fallback - scanlines effect */}
+          <div className="absolute inset-0 opacity-50">
+            {[...Array(100)].map((_, i) => {
+              const yPos = i * 1;
+              const centerY = 45;
+              const distFromCenter = Math.abs(yPos - centerY);
+              const intensity = Math.max(0, 1 - distFromCenter / 40);
+              const width = 30 + intensity * 50;
+              
+              return (
+                <div
+                  key={i}
+                  className="absolute h-[2px]"
+                  style={{
+                    top: `${yPos}%`,
+                    right: 0,
+                    width: `${width}%`,
+                    background: `linear-gradient(to left, transparent 0%, #C87C2D ${20 + intensity * 30}%, transparent 100%)`,
+                    opacity: intensity * 0.8,
+                  }}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
 
-      <main className="relative z-10 min-h-screen flex flex-col">
-        {/* Header */}
-        <header className="w-full px-6 py-6 md:px-12 md:py-8">
-          <div className="max-w-7xl mx-auto">
-            <span className="font-[family-name:var(--font-bebas)] text-[#CFCFCF] text-2xl tracking-[0.2em]">
-              SHUM
-            </span>
+      {/* Header with pixel logo */}
+      <header className="relative z-10 w-full px-6 py-4 md:px-8 md:py-6">
+        <div className="max-w-4xl mx-auto flex justify-center">
+          {/* Try image logo first */}
+          <div className="relative">
+            <Image
+              src="/images/logo.png"
+              alt="SHUM"
+              width={120}
+              height={32}
+              className="opacity-70"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
+            />
+            {/* SVG Fallback */}
+            <ShumLogo />
           </div>
-        </header>
+        </div>
+      </header>
 
-        {/* Hero Section */}
-        <section className="flex-1 flex items-center px-6 md:px-12 py-8">
-          <div className="max-w-7xl mx-auto w-full">
-            {/* Title */}
-            <div className="mb-8">
-              <h1 className="font-[family-name:var(--font-bebas)] text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight text-[#CFCFCF]">
-                SHUM OSINT
-              </h1>
-              <h2 className="font-[family-name:var(--font-bebas)] text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight text-[#6B6B6B]">
-                DONATION HUB
-              </h2>
-            </div>
+      {/* Main content */}
+      <main className="relative z-10 flex-1 flex items-center justify-center px-6 md:px-8 py-8">
+        <div className="max-w-4xl mx-auto w-full">
+          {/* Title */}
+          <div className="text-center mb-6">
+            <h1 className="font-[family-name:var(--font-bebas)] text-4xl md:text-6xl lg:text-7xl tracking-tight">
+              <span className="text-[#CFCFCF]">SHUM OSINT</span>
+            </h1>
+            <h2 className="font-[family-name:var(--font-bebas)] text-3xl md:text-5xl lg:text-6xl tracking-tight text-[#5A5A5A]">
+              DONATION HUB
+            </h2>
+          </div>
 
-            {/* Description */}
-            <p className="text-[#6B6B6B] text-sm md:text-base max-w-md leading-relaxed mb-12">
-              Шум — це розвідувальна спільнота, що використовує аналітичні методи та розвідку з відкритих джерел для збору Інформації та виявлення цілей для Сил оборони України.
+          {/* Description */}
+          <p className="text-[#6B6B6B] text-xs md:text-sm max-w-md mx-auto text-center leading-relaxed mb-10">
+            Шум — це розвідувальна спільнота, що використовує аналітичні методи та розвідку з відкритих джерел для збору Інформації та виявлення цілей для Сил оборони України.
+          </p>
+
+          {/* FPV Drone with CTA */}
+          <div className="flex justify-center mb-8">
+            <a
+              href="https://send.monobank.ua/jar/example"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative hover:scale-105 transition-transform"
+            >
+              {/* Try image drone first */}
+              <Image
+                src="/images/drone.png"
+                alt="FPV Drone"
+                width={400}
+                height={120}
+                className="opacity-90"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
+              {/* SVG Fallback */}
+              <FPVDrone />
+              
+              {/* CTA text overlay */}
+              <span className="absolute left-1/2 top-1/2 -translate-x-1/4 -translate-y-1/2 font-[family-name:var(--font-bebas)] text-base md:text-xl text-[#C87C2D] tracking-wider whitespace-nowrap group-hover:text-[#E89A4A] transition-colors drop-shadow-lg">
+                ДОНАТЬ НА ФАШИЗМ
+              </span>
+            </a>
+          </div>
+
+          {/* Big Text */}
+          <div className="text-center mb-10">
+            <p className="font-[family-name:var(--font-bebas)] text-3xl md:text-5xl lg:text-6xl leading-[1] tracking-tight text-[#CFCFCF] italic">
+              ПРИЄДНУЙТЕСЬ ДО
             </p>
+            <p className="font-[family-name:var(--font-bebas)] text-3xl md:text-5xl lg:text-6xl leading-[1] tracking-tight text-[#CFCFCF] italic">
+              НАШОЇ КОМАНДИ
+            </p>
+          </div>
 
-            {/* FPV Drone with CTA */}
-            <div className="relative mb-16">
-              <a
-                href="https://send.monobank.ua/jar/example"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-4 hover:scale-105 transition-transform"
-              >
-                {/* Drone SVG */}
-                <svg 
-                  width="120" 
-                  height="80" 
-                  viewBox="0 0 120 80" 
-                  className="text-[#C87C2D]"
-                >
-                  {/* Body */}
-                  <polygon 
-                    points="0,40 30,25 30,55" 
-                    fill="currentColor"
-                  />
-                  <rect x="30" y="30" width="50" height="20" fill="currentColor" rx="2"/>
-                  {/* Front */}
-                  <polygon 
-                    points="80,30 120,35 120,45 80,50" 
-                    fill="currentColor"
-                  />
-                  {/* Wings */}
-                  <rect x="40" y="10" width="30" height="8" fill="currentColor" rx="1"/>
-                  <rect x="40" y="62" width="30" height="8" fill="currentColor" rx="1"/>
-                </svg>
-
-                {/* CTA Button */}
-                <span className="font-[family-name:var(--font-bebas)] text-xl md:text-2xl text-[#C87C2D] tracking-wider group-hover:text-[#E89A4A] transition-colors">
-                  ДОНАТЬ НА ФАШИЗМ
-                </span>
-              </a>
-            </div>
-
-            {/* Big Text */}
-            <div className="mb-12">
-              <p className="font-[family-name:var(--font-bebas)] text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight text-[#4A4A4A]">
-                ПРИЄДНУЙТЕСЬ ДО
-              </p>
-              <p className="font-[family-name:var(--font-bebas)] text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight text-[#4A4A4A]">
-                НАШОЇ КОМАНДИ
-              </p>
-            </div>
-
-            {/* Email Form */}
+          {/* Email Form */}
+          <div className="flex justify-center">
             {submitted ? (
-              <div className="max-w-md">
-                <p className="text-[#C87C2D] font-medium">✓ Дякуємо за підписку!</p>
-              </div>
+              <p className="text-[#C87C2D] font-medium">✓ Дякуємо за підписку!</p>
             ) : (
-              <form onSubmit={handleSubmit} className="flex gap-4 max-w-md">
+              <form onSubmit={handleSubmit} className="flex gap-2 w-full max-w-md">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="email"
                   required
-                  className="flex-1 bg-[#1A1A19] border border-[#2A2A29] px-6 py-4 text-[#CFCFCF] placeholder-[#4A4A4A] focus:outline-none focus:border-[#C87C2D] transition-colors font-[family-name:var(--font-bebas)] text-xl tracking-wider"
+                  className="flex-1 bg-[#141413] border border-[#2A2A29] px-5 py-3 text-[#CFCFCF] placeholder-[#4A4A4A] focus:outline-none focus:border-[#C87C2D] transition-colors font-[family-name:var(--font-bebas)] text-lg tracking-wider"
                 />
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-[#2A2A29] hover:bg-[#3A3A39] disabled:opacity-50 text-[#CFCFCF] px-8 py-4 font-[family-name:var(--font-bebas)] text-xl tracking-wider transition-all"
+                  className="bg-[#3A3A39] hover:bg-[#4A4A49] disabled:opacity-50 text-[#CFCFCF] px-6 py-3 font-[family-name:var(--font-bebas)] text-lg tracking-wider transition-all"
                 >
                   {isSubmitting ? "..." : "reg."}
                 </button>
               </form>
             )}
           </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="px-6 md:px-12 py-6">
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <p className="text-[#4A4A4A] text-sm">
-              © 2026 SHUM OSINT
-            </p>
-            <div className="flex items-center gap-6">
-              <a href="#" className="text-[#4A4A4A] hover:text-[#C87C2D] transition-colors">
-                <TelegramIcon />
-              </a>
-              <a href="#" className="text-[#4A4A4A] hover:text-[#C87C2D] transition-colors">
-                <InstagramIcon />
-              </a>
-            </div>
-          </div>
-        </footer>
+        </div>
       </main>
     </div>
   );
 }
 
-function TelegramIcon() {
+// Pixel-style SHUM logo (fallback)
+function ShumLogo() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+    <svg width="100" height="24" viewBox="0 0 100 24" className="text-[#7A7A7A]">
+      {/* S */}
+      <rect x="0" y="0" width="3" height="3" fill="currentColor"/>
+      <rect x="3" y="0" width="3" height="3" fill="currentColor"/>
+      <rect x="6" y="0" width="3" height="3" fill="currentColor"/>
+      <rect x="0" y="3" width="3" height="3" fill="currentColor"/>
+      <rect x="0" y="6" width="3" height="3" fill="currentColor"/>
+      <rect x="3" y="6" width="3" height="3" fill="currentColor"/>
+      <rect x="6" y="6" width="3" height="3" fill="currentColor"/>
+      <rect x="6" y="9" width="3" height="3" fill="currentColor"/>
+      <rect x="0" y="12" width="3" height="3" fill="currentColor"/>
+      <rect x="3" y="12" width="3" height="3" fill="currentColor"/>
+      <rect x="6" y="12" width="3" height="3" fill="currentColor"/>
+      
+      {/* H */}
+      <rect x="16" y="0" width="3" height="15" fill="currentColor"/>
+      <rect x="22" y="0" width="3" height="15" fill="currentColor"/>
+      <rect x="19" y="6" width="3" height="3" fill="currentColor"/>
+      
+      {/* U */}
+      <rect x="32" y="0" width="3" height="15" fill="currentColor"/>
+      <rect x="38" y="0" width="3" height="15" fill="currentColor"/>
+      <rect x="35" y="12" width="3" height="3" fill="currentColor"/>
+      
+      {/* M */}
+      <rect x="48" y="0" width="3" height="15" fill="currentColor"/>
+      <rect x="60" y="0" width="3" height="15" fill="currentColor"/>
+      <rect x="51" y="3" width="3" height="3" fill="currentColor"/>
+      <rect x="54" y="6" width="3" height="3" fill="currentColor"/>
+      <rect x="57" y="3" width="3" height="3" fill="currentColor"/>
     </svg>
   );
 }
 
-function InstagramIcon() {
+// FPV Drone SVG (fallback)
+function FPVDrone() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    <svg width="320" height="90" viewBox="0 0 320 90" className="text-[#C87C2D]">
+      {/* Tail fin */}
+      <polygon points="0,45 45,20 45,70" fill="currentColor"/>
+      
+      {/* Body rear connector */}
+      <rect x="45" y="38" width="50" height="14" fill="currentColor"/>
+      
+      {/* Center body/motor housing */}
+      <ellipse cx="120" cy="45" rx="30" ry="22" fill="currentColor"/>
+      
+      {/* Top wing */}
+      <rect x="100" y="8" width="40" height="10" fill="currentColor" rx="2"/>
+      
+      {/* Bottom wing */}
+      <rect x="100" y="72" width="40" height="10" fill="currentColor" rx="2"/>
+      
+      {/* Front arm */}
+      <rect x="145" y="41" width="120" height="8" fill="currentColor"/>
+      
+      {/* Nose/tip */}
+      <polygon points="265,45 320,42 320,48" fill="currentColor"/>
     </svg>
   );
 }
