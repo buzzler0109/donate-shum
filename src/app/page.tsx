@@ -10,10 +10,7 @@ export default function Home() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
     setSubmitted(true);
     setIsSubmitting(false);
     setEmail("");
@@ -21,172 +18,142 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#080807] relative overflow-hidden">
-      {/* Background gradient effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#C87C2D]/5 rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#C87C2D]/3 rounded-full blur-[120px]" />
+      {/* Decorative lines on the right */}
+      <div className="absolute right-0 top-1/4 w-1/3 h-96 pointer-events-none opacity-30">
+        {[...Array(40)].map((_, i) => (
+          <div 
+            key={i} 
+            className="h-[2px] bg-[#C87C2D] mb-2"
+            style={{ 
+              width: `${Math.random() * 60 + 40}%`,
+              marginLeft: 'auto',
+              opacity: Math.random() * 0.5 + 0.3
+            }}
+          />
+        ))}
       </div>
 
-      {/* Main content */}
       <main className="relative z-10 min-h-screen flex flex-col">
         {/* Header */}
         <header className="w-full px-6 py-6 md:px-12 md:py-8">
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[#C87C2D] rounded-sm flex items-center justify-center">
-                <span className="font-[family-name:var(--font-bebas)] text-[#080807] text-xl font-bold">S</span>
-              </div>
-              <span className="font-[family-name:var(--font-bebas)] text-[#CFCFCF] text-xl tracking-wider">
-                SHUM<span className="text-[#C87C2D]">.</span>OSINT
-              </span>
-            </div>
-            <nav className="hidden md:flex items-center gap-8">
-              <a href="#about" className="text-[#6B6B6B] hover:text-[#CFCFCF] transition-colors text-sm tracking-wide">
-                ПРО НАС
-              </a>
-              <a href="#donate" className="text-[#6B6B6B] hover:text-[#CFCFCF] transition-colors text-sm tracking-wide">
-                ПІДТРИМАТИ
-              </a>
-            </nav>
+          <div className="max-w-7xl mx-auto">
+            <span className="font-[family-name:var(--font-bebas)] text-[#CFCFCF] text-2xl tracking-[0.2em]">
+              SHUM
+            </span>
           </div>
         </header>
 
         {/* Hero Section */}
-        <section className="flex-1 flex items-center px-6 md:px-12 py-12">
-          <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left content */}
-            <div className="space-y-8">
-              <div className="space-y-2">
-                <p className="text-[#C87C2D] text-sm tracking-[0.3em] uppercase">
-                  DONATION HUB
-                </p>
-                <h1 className="font-[family-name:var(--font-bebas)] text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tight">
-                  <span className="text-[#CFCFCF]">SHUM OSINT</span>
-                  <br />
-                  <span className="text-[#C87C2D]">COMMUNITY</span>
-                </h1>
-              </div>
-
-              <p className="text-[#6B6B6B] text-lg max-w-md leading-relaxed">
-                Зроби свій внесок у перемогу — підтримай армію зараз. Кожна гривня наближає нас до мети.
-              </p>
-
-              {/* Donation buttons */}
-              <div className="flex flex-wrap gap-4">
-                <a
-                  href="https://send.monobank.ua/jar/example"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[#C87C2D] hover:bg-[#E89A4A] text-[#080807] px-8 py-4 font-semibold tracking-wide transition-all hover:scale-105 animate-pulse-glow"
-                >
-                  <MonoIcon />
-                  MONOBANK
-                </a>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 border border-[#2A2A29] hover:border-[#C87C2D] text-[#CFCFCF] px-8 py-4 font-semibold tracking-wide transition-all hover:bg-[#C87C2D]/10"
-                >
-                  <CryptoIcon />
-                  CRYPTO
-                </a>
-              </div>
-            </div>
-
-            {/* Right content - Big text */}
-            <div className="relative">
-              <div className="font-[family-name:var(--font-bebas)] text-[80px] md:text-[120px] lg:text-[160px] leading-[0.85] tracking-tight text-outline select-none">
-                ПРИЄД
-                <br />
-                НУЙТЕСЬ
-                <br />
-                <span className="text-outline-accent">
-                  ДО НАШОЇ
-                </span>
-                <br />
-                КОМАНДИ
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Email subscription */}
-        <section id="subscribe" className="px-6 md:px-12 py-16 border-t border-[#1A1A19]">
-          <div className="max-w-7xl mx-auto">
-            <div className="max-w-xl">
-              <h2 className="font-[family-name:var(--font-bebas)] text-3xl md:text-4xl text-[#CFCFCF] mb-4">
-                ЗАЛИШАЙСЯ НА ЗВ&apos;ЯЗКУ
+        <section className="flex-1 flex items-center px-6 md:px-12 py-8">
+          <div className="max-w-7xl mx-auto w-full">
+            {/* Title */}
+            <div className="mb-8">
+              <h1 className="font-[family-name:var(--font-bebas)] text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight text-[#CFCFCF]">
+                SHUM OSINT
+              </h1>
+              <h2 className="font-[family-name:var(--font-bebas)] text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight text-[#6B6B6B]">
+                DONATION HUB
               </h2>
-              <p className="text-[#6B6B6B] mb-8">
-                Підпишись на оновлення та дізнавайся першим про наші збори та досягнення.
-              </p>
-
-              {submitted ? (
-                <div className="bg-[#C87C2D]/10 border border-[#C87C2D]/30 p-6 rounded">
-                  <p className="text-[#C87C2D] font-medium">✓ Дякуємо за підписку!</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="email"
-                    required
-                    className="flex-1 bg-[#1A1A19] border border-[#2A2A29] px-6 py-4 text-[#CFCFCF] placeholder-[#6B6B6B] focus:outline-none focus:border-[#C87C2D] transition-colors"
-                  />
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="bg-[#C87C2D] hover:bg-[#E89A4A] disabled:opacity-50 text-[#080807] px-8 py-4 font-semibold tracking-wide transition-all"
-                  >
-                    {isSubmitting ? "..." : "REG"}
-                  </button>
-                </form>
-              )}
             </div>
+
+            {/* Description */}
+            <p className="text-[#6B6B6B] text-sm md:text-base max-w-md leading-relaxed mb-12">
+              Шум — це розвідувальна спільнота, що використовує аналітичні методи та розвідку з відкритих джерел для збору Інформації та виявлення цілей для Сил оборони України.
+            </p>
+
+            {/* FPV Drone with CTA */}
+            <div className="relative mb-16">
+              <a
+                href="https://send.monobank.ua/jar/example"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-4 hover:scale-105 transition-transform"
+              >
+                {/* Drone SVG */}
+                <svg 
+                  width="120" 
+                  height="80" 
+                  viewBox="0 0 120 80" 
+                  className="text-[#C87C2D]"
+                >
+                  {/* Body */}
+                  <polygon 
+                    points="0,40 30,25 30,55" 
+                    fill="currentColor"
+                  />
+                  <rect x="30" y="30" width="50" height="20" fill="currentColor" rx="2"/>
+                  {/* Front */}
+                  <polygon 
+                    points="80,30 120,35 120,45 80,50" 
+                    fill="currentColor"
+                  />
+                  {/* Wings */}
+                  <rect x="40" y="10" width="30" height="8" fill="currentColor" rx="1"/>
+                  <rect x="40" y="62" width="30" height="8" fill="currentColor" rx="1"/>
+                </svg>
+
+                {/* CTA Button */}
+                <span className="font-[family-name:var(--font-bebas)] text-xl md:text-2xl text-[#C87C2D] tracking-wider group-hover:text-[#E89A4A] transition-colors">
+                  ДОНАТЬ НА ФАШИЗМ
+                </span>
+              </a>
+            </div>
+
+            {/* Big Text */}
+            <div className="mb-12">
+              <p className="font-[family-name:var(--font-bebas)] text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight text-[#4A4A4A]">
+                ПРИЄДНУЙТЕСЬ ДО
+              </p>
+              <p className="font-[family-name:var(--font-bebas)] text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight text-[#4A4A4A]">
+                НАШОЇ КОМАНДИ
+              </p>
+            </div>
+
+            {/* Email Form */}
+            {submitted ? (
+              <div className="max-w-md">
+                <p className="text-[#C87C2D] font-medium">✓ Дякуємо за підписку!</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex gap-4 max-w-md">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="email"
+                  required
+                  className="flex-1 bg-[#1A1A19] border border-[#2A2A29] px-6 py-4 text-[#CFCFCF] placeholder-[#4A4A4A] focus:outline-none focus:border-[#C87C2D] transition-colors font-[family-name:var(--font-bebas)] text-xl tracking-wider"
+                />
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="bg-[#2A2A29] hover:bg-[#3A3A39] disabled:opacity-50 text-[#CFCFCF] px-8 py-4 font-[family-name:var(--font-bebas)] text-xl tracking-wider transition-all"
+                >
+                  {isSubmitting ? "..." : "reg."}
+                </button>
+              </form>
+            )}
           </div>
         </section>
 
         {/* Footer */}
-        <footer className="px-6 md:px-12 py-8 border-t border-[#1A1A19]">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[#6B6B6B] text-sm">
-              © 2026 SHUM OSINT Community. Слава Україні!
+        <footer className="px-6 md:px-12 py-6">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <p className="text-[#4A4A4A] text-sm">
+              © 2026 SHUM OSINT
             </p>
             <div className="flex items-center gap-6">
-              <a href="#" className="text-[#6B6B6B] hover:text-[#C87C2D] transition-colors">
+              <a href="#" className="text-[#4A4A4A] hover:text-[#C87C2D] transition-colors">
                 <TelegramIcon />
               </a>
-              <a href="#" className="text-[#6B6B6B] hover:text-[#C87C2D] transition-colors">
+              <a href="#" className="text-[#4A4A4A] hover:text-[#C87C2D] transition-colors">
                 <InstagramIcon />
-              </a>
-              <a href="#" className="text-[#6B6B6B] hover:text-[#C87C2D] transition-colors">
-                <TwitterIcon />
               </a>
             </div>
           </div>
         </footer>
       </main>
     </div>
-  );
-}
-
-// Icons
-function MonoIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-    </svg>
-  );
-}
-
-function CryptoIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <circle cx="12" cy="12" r="10"/>
-      <path d="M9.5 9.5c0-1.5 1.5-2.5 3-2.5s2.5 1 2.5 2.5-1.5 2-3 2.5v2"/>
-      <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
-    </svg>
   );
 }
 
@@ -202,14 +169,6 @@ function InstagramIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-    </svg>
-  );
-}
-
-function TwitterIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
     </svg>
   );
 }
