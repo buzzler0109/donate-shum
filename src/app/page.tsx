@@ -33,10 +33,10 @@ export default function Home() {
         />
       </div>
 
-      {/* Main content */}
-      <main className="relative z-10 flex-1 flex items-start px-8 md:px-16 py-12">
-        <div className="max-w-2xl w-full">
-          {/* Title - left aligned */}
+      {/* Main content - CENTERED */}
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-8 md:px-16 py-8">
+        <div className="max-w-2xl w-full flex flex-col items-center text-center">
+          {/* Title */}
           <div className="mb-4">
             <h1 className="font-[family-name:var(--font-bebas)] text-5xl md:text-7xl lg:text-8xl tracking-tight text-white font-bold leading-[0.9]">
               SHUM OSINT
@@ -46,8 +46,8 @@ export default function Home() {
             </h2>
           </div>
 
-          {/* Description - left aligned */}
-          <p className="text-[#6B6B6B] text-xs md:text-sm max-w-sm leading-relaxed mb-12">
+          {/* Description */}
+          <p className="text-[#6B6B6B] text-xs md:text-sm max-w-sm leading-relaxed mb-10 text-left">
             Шум — це розвідувальна спільнота, що
             <br />використовує аналітичні методи та
             <br />розвідку з
@@ -65,29 +65,30 @@ export default function Home() {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              {/* Glow effect on hover */}
-              <div 
-                className={`absolute inset-0 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-                style={{ transform: 'scale(1.1)', filter: 'blur(2px)' }}
-              >
-                <Image
-                  src="/images/drone_blur.png"
-                  alt=""
-                  width={400}
-                  height={100}
-                  className="w-full h-auto"
-                />
-              </div>
+              {/* Glow background on hover */}
+              <Image
+                src="/images/drone_blur.png"
+                alt=""
+                width={450}
+                height={120}
+                className={`absolute -inset-4 w-[calc(100%+32px)] h-auto transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                style={{ left: '-16px', top: '-16px' }}
+              />
               
               {/* Main drone */}
               <Image
                 src="/images/drone.png"
-                alt="FPV Drone - Click to donate"
+                alt="FPV Drone"
                 width={400}
                 height={100}
                 className="relative z-10"
                 priority
               />
+              
+              {/* CTA text */}
+              <span className="absolute left-1/2 top-1/2 -translate-y-1/2 translate-x-[-20%] z-20 font-[family-name:var(--font-bebas)] text-lg md:text-2xl text-[#D4842A] tracking-wider whitespace-nowrap">
+                ДОНАТЬ НА ФАШИЗМ
+              </span>
             </a>
           </div>
         </div>
