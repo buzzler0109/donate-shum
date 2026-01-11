@@ -31,11 +31,16 @@ export default function Home() {
       </div>
 
       {/* Header with logo */}
-      <header className="relative z-10 w-full px-6 py-4 md:px-8 md:py-6">
+      <header className="relative z-10 w-full px-6 py-3 md:px-8 md:py-4 border-b border-[#2A2A29]">
         <div className="max-w-4xl mx-auto flex justify-center">
-          <span className="font-[family-name:var(--font-bebas)] text-[#7A7A7A] text-2xl tracking-[0.3em]">
-            SHUM
-          </span>
+          <Image
+            src="/images/logo.png"
+            alt="SHUM"
+            width={80}
+            height={24}
+            className="opacity-90"
+            priority
+          />
         </div>
       </header>
 
