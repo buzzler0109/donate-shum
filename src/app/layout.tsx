@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "SHUM OSINT | Donation Hub",
   description: "Підтримай SHUM OSINT Community. Приєднуйтесь до нашої команди.",
   keywords: ["SHUM", "OSINT", "donation", "Ukraine", "підтримка"],
+  icons: {
+    icon: "/images/favicon_.png",
+  },
   openGraph: {
     title: "SHUM OSINT | Donation Hub",
     description: "Підтримай SHUM OSINT Community",
