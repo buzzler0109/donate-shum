@@ -63,8 +63,6 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               className="relative inline-block"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
             >
               {/* Glow background on hover */}
               <Image
@@ -89,6 +87,42 @@ export default function Home() {
               
               {/* CTA text */}
 
+            </a>
+          </div>
+
+          {/* Donation cards */}
+          <div className="w-full mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
+            <a
+              href="https://send.monobank.ua/jar/79FAf4WWeX"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative overflow-hidden rounded-2xl border border-[#2A2A2A] bg-gradient-to-br from-[#111111] via-[#0D0D0D] to-[#0A0A0A] shadow-[0_20px_60px_rgba(0,0,0,0.45)] p-6 block hover:border-[#3A3A3A] hover:shadow-[0_24px_70px_rgba(0,0,0,0.6)] transition-all duration-200"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <div className="text-xs tracking-[0.2em] text-[#9F9F9F] mb-3 font-semibold">
+                MONOBANK
+              </div>
+              <div className="text-[11px] text-[#A5A5A5] mb-4 max-w-sm tracking-[0.28em] uppercase font-[family-name:var(--font-bebas)] font-semibold">
+                Зроби свій внесок у перемогу — 
+                <br />підтримай армію зараз.
+              </div>
+            </a>
+
+            <a
+              href="https://plisio.net/donate/Kg-O2hWu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative overflow-hidden rounded-2xl border border-[#2A2A2A] bg-gradient-to-br from-[#0F0F0F] via-[#0B0B0B] to-[#080808] shadow-[0_20px_60px_rgba(0,0,0,0.45)] p-6 block hover:border-[#3A3A3A] hover:shadow-[0_24px_70px_rgba(0,0,0,0.6)] transition-all duration-200"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <div className="text-xs tracking-[0.2em] text-[#9F9F9F] mb-3 font-semibold">
+                CRYPTO
+              </div>
+              <div className="text-[11px] text-[#A5A5A5] mb-2 tracking-[0.28em] uppercase font-[family-name:var(--font-bebas)] font-semibold">
+                Разом ми сильні — незламні
+              </div>
             </a>
           </div>
         </div>
