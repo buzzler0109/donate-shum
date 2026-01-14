@@ -28,42 +28,46 @@ export default function Home() {
       </header>
 
       {/* Scanlines background - below header */}
-      <div className="absolute top-16 right-4 sm:right-8 md:right-12 lg:right-16 xl:right-[200px] w-2/3 xl:w-[calc(66.666vw-200px)] h-[calc(100%-4rem)] pointer-events-none z-0">
+      <div className="absolute top-16 right-0 w-1/2 h-[calc(100%-4rem)] pointer-events-none z-0">
         <Image
           src="/images/scanlines.png"
           alt=""
           fill
-          className="object-contain object-right opacity-90 "
+          className="object-contain object-right opacity-90"
           priority
         />
       </div>
 
-      <div className="flex-1 flex flex-col px-4 sm:px-8 md:px-12 lg:px-16 xl:px-[200px]">
-      {/* Main content - LEFT ALIGNED */}
-      <main className="relative z-10 flex-1 flex flex-col justify-center py-8">
-        <div className="max-w-3xl w-full flex flex-col items-start">
-          {/* Title */}
-          <div className="mb-2">
-            <h1 className="font-[family-name:var(--font-bebas)] text-[80px] md:text-[100px] lg:text-[120px] tracking-tight text-white font-bold leading-[0.85]">
-              SHUM OSINT
-            </h1>
-            <h2 className="font-[family-name:var(--font-bebas)] text-[60px] md:text-[80px] lg:text-[100px] tracking-tight text-[#5A5A5A] leading-[0.85]">
-              DONATION HUB
-            </h2>
-          </div>
+      <div className="flex-1 flex flex-col">
+        {/* Main content - CENTERED */}
+        <main className="relative z-10 flex-1 flex flex-col justify-center items-center py-8 px-4 sm:px-8">
+          <div className="w-full max-w-4xl flex flex-col items-center text-center">
+            {/* Title */}
+            <div className="mb-4">
+              <h1 className="font-[family-name:var(--font-bebas)] text-[60px] sm:text-[80px] md:text-[100px] lg:text-[120px] tracking-tight text-white font-bold leading-[0.85]">
+                SHUM OSINT
+              </h1>
+              <h2 className="font-[family-name:var(--font-bebas)] text-[45px] sm:text-[60px] md:text-[80px] lg:text-[100px] tracking-tight text-[#5A5A5A] leading-[0.85]">
+                DONATION HUB
+              </h2>
+            </div>
 
-          {/* Description */}
-          <p className="text-[#6B6B6B] text-[13px] md:text-[14px] max-w-[340px] leading-[1.5] mb-6 text-left">
-            Шум — це розвідувальна спільнота, що
-            <br />використовує аналітичні методи та
-            <br />розвідку з
-            <br />відкритих джерел для збору Інформації та
-            <br />виявлення цілей для Сил оборони України.
-          </p>
+            {/* Description */}
+            <p className="text-[#6B6B6B] text-[13px] md:text-[14px] max-w-[340px] leading-[1.5] mb-6">
+              Шум — це розвідувальна спільнота, що
+              <br />використовує аналітичні методи та
+              <br />розвідку з
+              <br />відкритих джерел для збору Інформації та
+              <br />виявлення цілей для Сил оборони України.
+            </p>
 
-          {/* FPV Drone with hover glow effect */}
-          <div className="relative -ml-4">
-
+            {/* FPV Drone with hover glow effect - recruting link */}
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLScpwF4m7B27AkXUEeiMsuZhR9Ls6s6A5Ex1MVKz8nc8kA4m_g/viewform?usp=send_form"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative mb-4 inline-block"
+            >
               {/* Glow background on hover */}
               <Image
                 src="/images/drone_blur.png"
@@ -73,7 +77,6 @@ export default function Home() {
                 className={`absolute transition-opacity duration-300 ${isHovered ? 'opacity-100 animate-hover-pulse' : 'opacity-0'}`}
                 style={{ top: '-15px' }}
               />
-              
 
               {/* Main drone */}
               <Image
@@ -84,117 +87,113 @@ export default function Home() {
                 className="relative z-10"
                 priority
               />
-              
-              {/* CTA text */}
-
-          </div>
-
-          {/* Donation cards */}
-          <div className="w-full mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
-            {/* MONOBANK card */}
-            <a
-              href="https://send.monobank.ua/jar/79FAf4WWeX"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative overflow-hidden rounded-3xl border border-[#2A2A2A] bg-gradient-to-br from-[#181818] via-[#101010] to-[#060606] shadow-[0_18px_50px_rgba(0,0,0,0.6)] p-6 block hover:border-[#3A3A3A] hover:shadow-[0_24px_70px_rgba(0,0,0,0.8)] transition-all duration-200"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              {/* Top row */}
-              <div className="flex items-start justify-between mb-6">
-                <div className="text-[11px] tracking-[0.22em] text-[#E5E5E5] font-semibold">
-                  MONOBANK
-                </div>
-                <div className="h-7 w-10 rounded-lg bg-gradient-to-br from-[#3A3A3A] to-[#1C1C1C] border border-[#555555]/60 shadow-[0_0_0_1px_rgba(0,0,0,0.7)]" />
-              </div>
-
-              {/* Number / text row */}
-              <div className="space-y-3 mb-6">
-                <div className="flex gap-4 text-[13px] tracking-[0.35em] text-[#F5F5F5] font-[family-name:var(--font-bebas)]">
-                  <span>5168</span>
-                  <span>7573</span>
-                  <span>XXXX</span>
-                  <span>XXXX</span>
-                </div>
-                <div className="text-[10px] text-[#A5A5A5] max-w-sm tracking-[0.28em] uppercase font-[family-name:var(--font-bebas)] font-semibold leading-relaxed">
-                  Зроби свій внесок у перемогу — підтримай армію зараз.
-                </div>
-              </div>
-
-              {/* Bottom row */}
-              <div className="flex items-end justify-between text-[9px] text-[#8D8D8D] uppercase tracking-[0.2em]">
-                <div>
-                  <div className="text-[8px] text-[#5F5F5F] mb-1">CARDHOLDER</div>
-                  <div className="text-[10px] text-[#DADADA] tracking-[0.22em]">
-                    SHUM OSINT
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-[7px] text-[#666666] leading-none mb-1">
-                    VALID THRU
-                  </div>
-                  <div className="text-[10px] tracking-[0.15em] text-[#DADADA]">
-                    ∞
-                  </div>
-                </div>
-              </div>
             </a>
 
-            {/* CRYPTO card */}
-            <a
-              href="https://plisio.net/donate/Kg-O2hWu"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative overflow-hidden rounded-3xl border border-[#2A2A2A] bg-gradient-to-br from-[#151515] via-[#0C0C0C] to-[#050505] shadow-[0_18px_50px_rgba(0,0,0,0.6)] p-6 block hover:border-[#3A3A3A] hover:shadow-[0_24px_70px_rgba(0,0,0,0.8)] transition-all duration-200"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              {/* Top row */}
-              <div className="flex items-start justify-between mb-6">
-                <div className="text-[11px] tracking-[0.22em] text-[#E5E5E5] font-semibold">
-                  CRYPTO
-                </div>
-                <div className="flex gap-1.5 text-[9px] text-[#BBBBBB] tracking-[0.18em]">
-                  <span>USDT</span>
-                  <span>BTC</span>
-                  <span>ETH</span>
-                </div>
-              </div>
+            {/* Recruitment text */}
+            <p className="text-[#6B6B6B] text-[11px] tracking-[0.15em] uppercase mb-8">
+              Приєднуйся до команди — натисни на ракету
+            </p>
 
-              {/* Pseudo-number row */}
-              <div className="space-y-3 mb-6">
-                <div className="flex gap-4 text-[13px] tracking-[0.35em] text-[#F5F5F5] font-[family-name:var(--font-bebas)]">
-                  <span>SHUM</span>
-                  <span>XNGX</span>
-                  <span>USDC</span>
-                  <span>SHUM</span>
+            {/* Donation cards */}
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl">
+              {/* MONOBANK card */}
+              <a
+                href="https://send.monobank.ua/jar/79FAf4WWeX"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative overflow-hidden rounded-3xl border border-[#2A2A2A] bg-gradient-to-br from-[#181818] via-[#101010] to-[#060606] shadow-[0_18px_50px_rgba(0,0,0,0.6)] p-6 block hover:border-[#3A3A3A] hover:shadow-[0_24px_70px_rgba(0,0,0,0.8)] transition-all duration-200"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                {/* Top row */}
+                <div className="flex items-start justify-between mb-6">
+                  <div className="text-[11px] tracking-[0.22em] text-[#E5E5E5] font-semibold">
+                    MONOBANK
+                  </div>
+                  <div className="h-7 w-10 rounded-lg bg-gradient-to-br from-[#3A3A3A] to-[#1C1C1C] border border-[#555555]/60 shadow-[0_0_0_1px_rgba(0,0,0,0.7)]" />
                 </div>
-                <div className="text-[10px] text-[#A5A5A5] max-w-sm tracking-[0.28em] uppercase font-[family-name:var(--font-bebas)] font-semibold leading-relaxed">
-                  Разом ми сильні — незламні
-                </div>
-              </div>
 
-              {/* Bottom row */}
-              <div className="flex items-end justify-between text-[9px] text-[#8D8D8D] uppercase tracking-[0.2em]">
-                <div>
-                  <div className="text-[8px] text-[#5F5F5F] mb-1">ACCOUNT</div>
-                  <div className="text-[10px] text-[#DADADA] tracking-[0.22em]">
-                    SHUM CAMP
+                {/* Number row */}
+                <div className="mb-6">
+                  <div className="flex gap-4 text-[13px] tracking-[0.35em] text-[#F5F5F5] font-[family-name:var(--font-bebas)]">
+                    <span>5168</span>
+                    <span>7573</span>
+                    <span>XXXX</span>
+                    <span>XXXX</span>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="text-[7px] text-[#666666] leading-none mb-1">
-                    PROVIDER
+
+                {/* Bottom row */}
+                <div className="flex items-end justify-between text-[9px] text-[#8D8D8D] uppercase tracking-[0.2em]">
+                  <div>
+                    <div className="text-[8px] text-[#5F5F5F] mb-1">CARDHOLDER</div>
+                    <div className="text-[10px] text-[#DADADA] tracking-[0.22em]">
+                      SHUM OSINT
+                    </div>
                   </div>
-                  <div className="text-[10px] tracking-[0.18em] text-[#DADADA]">
-                    PLISIO
+                  <div className="text-right">
+                    <div className="text-[7px] text-[#666666] leading-none mb-1">
+                      VALID THRU
+                    </div>
+                    <div className="text-[10px] tracking-[0.15em] text-[#DADADA]">
+                      ∞
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
+              </a>
+
+              {/* CRYPTO card */}
+              <a
+                href="https://plisio.net/donate/Kg-O2hWu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative overflow-hidden rounded-3xl border border-[#2A2A2A] bg-gradient-to-br from-[#181818] via-[#101010] to-[#060606] shadow-[0_18px_50px_rgba(0,0,0,0.6)] p-6 block hover:border-[#3A3A3A] hover:shadow-[0_24px_70px_rgba(0,0,0,0.8)] transition-all duration-200"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                {/* Top row */}
+                <div className="flex items-start justify-between mb-6">
+                  <div className="text-[11px] tracking-[0.22em] text-[#E5E5E5] font-semibold">
+                    CRYPTO
+                  </div>
+                  <div className="flex gap-1.5 text-[9px] text-[#BBBBBB] tracking-[0.18em]">
+                    <span>USDT</span>
+                    <span>BTC</span>
+                    <span>ETH</span>
+                  </div>
+                </div>
+
+                {/* Number row */}
+                <div className="mb-6">
+                  <div className="flex gap-4 text-[13px] tracking-[0.35em] text-[#F5F5F5] font-[family-name:var(--font-bebas)]">
+                    <span>SHUM</span>
+                    <span>XNGX</span>
+                    <span>USDC</span>
+                    <span>SHUM</span>
+                  </div>
+                </div>
+
+                {/* Bottom row */}
+                <div className="flex items-end justify-between text-[9px] text-[#8D8D8D] uppercase tracking-[0.2em]">
+                  <div>
+                    <div className="text-[8px] text-[#5F5F5F] mb-1">ACCOUNT</div>
+                    <div className="text-[10px] text-[#DADADA] tracking-[0.22em]">
+                      SHUM CAMP
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-[7px] text-[#666666] leading-none mb-1">
+                      PROVIDER
+                    </div>
+                    <div className="text-[10px] tracking-[0.18em] text-[#DADADA]">
+                      PLISIO
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
       </div>
     </div>
   );
